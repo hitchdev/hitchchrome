@@ -13,6 +13,7 @@ PROJECT_NAME = "hitchchrome"
 
 @expected(CommandError)
 def run():
+    """Run an end to end test"""
     python_path = DIR.gen / "venv"
     if not python_path.exists():
         python = hitchpylibrarytoolkit.project_build(
@@ -26,6 +27,9 @@ def run():
     DIR.gen.joinpath("example.py").write_text(DIR.key.joinpath("example.py").text())
     python(DIR.gen.joinpath("example.py")).in_dir(DIR.gen).run()
 
+def clean():
+    """Clean out built chrome"""
+    DIR.gen.joinpath("chrome").rmtree(ignore_errors=True)
 
 def deploy(version):
     """

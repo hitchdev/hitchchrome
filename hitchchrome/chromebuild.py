@@ -4,7 +4,7 @@ from commandlib import Command
 from hitchchrome import utils
 from path import Path
 import hitchbuild
-
+import stat
 
 CHROME_LINUX_URL = "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F756066%2Fchrome-linux.zip?generation=1585871012733067&alt=media"
 
@@ -51,6 +51,16 @@ class ChromeBuild(hitchbuild.HitchBuild):
             )
             utils.extract_archive(download_to, self.buildpath)
             download_to.remove()
+            
+            chromedriver_bin = Path(self.buildpath / "chromedriver_linux64" / "chromedriver")
+            chromedriver_bin.chmod(
+                chromedriver_bin.stat().st_mode | stat.S_IEXEC
+            )
+            chrome_bin = Path(self.buildpath / "chrome-linux" / "chrome")
+            chrome_bin.chmod(
+                chrome_bin.stat().st_mode | stat.S_IEXEC
+            )
+            
             self.verify()
             self.refingerprint()
     
