@@ -11,9 +11,7 @@ and install its own isolated version of of Chrome *and* ChromeDriver that
 will work together and won't randomly break when somebody upgrades
 something.
 
-HitchChrome is part of the [hitchdev framework](http://hitchdev.com) -
-an attempt to introduce a whole new philosophy of testing, specifying and
-developing python code.
+HitchChrome is part of the [hitchdev framework](http://hitchdev.com).
 
 ## How?
 
