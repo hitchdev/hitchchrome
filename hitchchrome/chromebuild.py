@@ -52,6 +52,15 @@ class ChromeBuild(hitchbuild.HitchBuild):
             utils.extract_archive(download_to, self.buildpath)
             download_to.remove()
             
+            chromedriver_bin = Path(self.buildpath / "chromedriver_linux64" / "chromedriver")
+            chromedriver_bin.chmod(
+                chromedriver_bin.stat().st_mode | stat.S_IEXEC
+            )
+            chrome_bin = Path(self.buildpath / "chrome-linux" / "chrome")
+            chrome_bin.chmod(
+                chrome_bin.stat().st_mode | stat.S_IEXEC
+            )
+            
             self.verify()
             self.refingerprint()
     
