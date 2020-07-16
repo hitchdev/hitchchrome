@@ -52,15 +52,6 @@ class ChromeBuild(hitchbuild.HitchBuild):
             utils.extract_archive(download_to, self.buildpath)
             download_to.remove()
             
-            chromedriver_bin = Path(self.buildpath / "chromedriver_linux64" / "chromedriver")
-            chromedriver_bin.chmod(
-                chromedriver_bin.stat().st_mode | stat.S_IEXEC
-            )
-            chrome_bin = Path(self.buildpath / "chrome-linux" / "chrome")
-            chrome_bin.chmod(
-                chrome_bin.stat().st_mode | stat.S_IEXEC
-            )
-            
             self.verify()
             self.refingerprint()
     
@@ -68,10 +59,13 @@ class ChromeBuild(hitchbuild.HitchBuild):
         assert self.version in self.chrome_bin("--version").output()
         assert self.version in self.chromedriver_bin("--version").output()
     
-    def webdriver(self, headless=False):
+    def webdriver(self, headless=False, nosandbox=False):
         options = Options()
         options.binary_location = str(self.chrome_bin)
         options.headless = headless
+
+        if nosandbox:
+            options.add_argument("--no-sandbox")
 
         return webdriver.Chrome(
             options=options,
