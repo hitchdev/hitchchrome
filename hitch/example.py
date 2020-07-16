@@ -8,6 +8,6 @@ driver = chrome_build.webdriver()
 driver.get("http://www.google.com")
 driver.quit()
 
-driver = chrome_build.webdriver(headless=True)
+driver = chrome_build.webdriver(headless=True, nosandbox=True)
 driver.get("http://www.google.com")
 driver.quit()
