@@ -59,7 +59,7 @@ driver.quit()
 
 * Docker. Either you run the browser headless or you will potentially spend more time trying to get it to work than it took me to build this package. That said, you could potentially run this package in docker (see caveats below though).
 * pyderman - only downloads chromedriver. Unless all three versions are controlled and kept in sync (browser, driver, selenium), something will likely get out of sync eventually.
-* chromedriver-binary -- same. Also, you have to manually update it in your requirements.txt when your OS upgrades chrome or chromium or you want to upgrade selenium.
+* chromedriver-binary -- same. Also, you have to manually update it in your requirements.txt when your OS upgrades chrome or chromium or you want to upgrade selenium. I was using this when I decided to write this package.
 
 ## Caveats
 
