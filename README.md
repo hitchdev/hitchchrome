@@ -12,10 +12,10 @@ This package is a way to install all three of these *together*
 to avoid this problem not only when you first set selenium up
 but also to prevent this scenario, which has happened to me:
 
-# You've got a big release planned for tomorrow.
-# Google chrome/chromium is upgraded by your OS or inside your docker container somehow.
-# Your regression test suite breaks because the new version of the browser is incompatible and your tests break.
-# You're up all night trying to fix it.
+1. You've got a big release planned for tomorrow.
+2. Google chrome/chromium is upgraded by your OS or inside your docker container somehow.
+3. Your regression test suite breaks because the new version of the browser is incompatible and your tests break.
+4. You're up all night trying to fix it.
 
 HitchChrome is part of the [hitchdev framework](http://hitchdev.com).
 
