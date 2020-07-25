@@ -5,15 +5,14 @@ from hitchchrome import utils
 from path import Path
 import hitchbuild
 import stat
+import json
+import sys
 
-CHROME_LINUX_URL = "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F756066%2Fchrome-linux.zip?generation=1585871012733067&alt=media"
-
-CHROMEDRIVER_URL = "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F756066%2Fchromedriver_linux64.zip?generation=1585871017688644&alt=media"
-
+VERSIONS_PATH = Path(__file__).dirname().abspath() / "versions.json"
 
 class ChromeBuild(hitchbuild.HitchBuild):
     def __init__(self, path, version):
-        assert version == "83"
+        assert version == "84"
         self.buildpath = Path(path).abspath()
         self.fingerprint_path = self.buildpath / "fingerprint.txt"
         self.version = version
@@ -34,29 +33,36 @@ class ChromeBuild(hitchbuild.HitchBuild):
             self.buildpath.rmtree(ignore_errors=True)
             self.buildpath.mkdir()
             
+            download_urls = json.loads(VERSIONS_PATH.text())[self.version]
+            
+            if sys.platform == "linux2" or sys.platform == "linux":
+                chrome_download_url = download_urls["linux_chrome"]
+                chromedriver_download_url = download_urls["linux_chromedriver"]
+                os_name = "linux"
+            elif sys.platform == "darwin":
+                chrome_download_url = download_urls["mac_chrome"]
+                chromedriver_download_url = download_urls["mac_chromedriver"]
+                os_name = "mac"
+            else:
+                raise Exception("Platform {} not supported :(".format(sys.platform))
+            
             # Install chrome
-            download_to = self.tmp / "chrome-{}.tar.gz".format(self.version)
-            utils.download_file(
-                download_to,
-                CHROME_LINUX_URL
-            )
+            download_to = self.tmp / "chrome-{}.zip".format(self.version)
+            utils.download_file(download_to, chrome_download_url)
             utils.extract_archive(download_to, self.buildpath)
             download_to.remove()
                                       
             # Install chromedriver
-            download_to = self.tmp / "chromedriver-{}.tar.gz".format(self.version)
-            utils.download_file(
-                download_to,
-                CHROMEDRIVER_URL,
-            )
+            download_to = self.tmp / "chromedriver-{}.zip".format(self.version)
+            utils.download_file(download_to, chromedriver_download_url)
             utils.extract_archive(download_to, self.buildpath)
             download_to.remove()
             
-            chromedriver_bin = Path(self.buildpath / "chromedriver_linux64" / "chromedriver")
+            chromedriver_bin = Path(self.buildpath / "chromedriver_{}64".format(os_name) / "chromedriver")
             chromedriver_bin.chmod(
                 chromedriver_bin.stat().st_mode | stat.S_IEXEC
             )
-            chrome_bin = Path(self.buildpath / "chrome-linux" / "chrome")
+            chrome_bin = Path(self.buildpath / "chrome-{}".format(os_name) / "chrome")
             chrome_bin.chmod(
                 chrome_bin.stat().st_mode | stat.S_IEXEC
             )

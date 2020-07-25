@@ -20,7 +20,7 @@ First, build into a directory of your choice:
 ```python
 from hitchchrome import ChromeBuild
 
-chrome_build = ChromeBuild("./chrome83", "83")
+chrome_build = ChromeBuild("./chrome84", "84")
 chrome_build.ensure_built()
 ```
 

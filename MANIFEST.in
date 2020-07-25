@@ -1,6 +1,7 @@
 include VERSION
 include LICENSE.txt
 include README.md
+include hitchchrome/versions.json
 recursive-include hitch *
 prune hitch/__pycache__
 prune hitch/gen

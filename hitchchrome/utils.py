@@ -1,4 +1,5 @@
 from commandlib import Command, CommandError
+from path import Path
 import patoolib
 import shutil
 import os
@@ -16,9 +17,12 @@ class DownloadError(Exception):
     pass
 
 
-def download_file(downloaded_file_name, url, max_connections=2, max_concurrent=5):
+def download_file(downloaded_file_path, url, max_connections=2, max_concurrent=5):
     """Download file to specified location."""
-    if os.path.exists(downloaded_file_name):
+    file_path = Path(downloaded_file_path)
+    assert file_path.isabs(), "download file path must be absolute, not relative"
+    if file_path.exists():
+        log("{} already downloaded".format(file_path))
         return
 
     log("Downloading: {}\n".format(url))
@@ -27,13 +31,14 @@ def download_file(downloaded_file_name, url, max_connections=2, max_concurrent=5
     aria2c = aria2c("--max-concurrent-downloads={}".format(max_concurrent))
 
     try:
-        if os.path.isabs(downloaded_file_name):
-            aria2c("--dir=/", "--out={}.part".format(downloaded_file_name), url).run()
-        else:
-            aria2c("--dir=.", "--out={}.part".format(downloaded_file_name), url).run()
+        aria2c(
+            "--dir={}".format(file_path.dirname()),
+            "--out={}.part".format(file_path.basename()),
+            url
+        ).run()
     except CommandError:
         raise DownloadError(
             "Failed to download {}. Re-running may fix the problem.".format(url)
         )
 
-    shutil.move(downloaded_file_name + ".part", downloaded_file_name)
+    shutil.move(file_path + ".part", file_path)

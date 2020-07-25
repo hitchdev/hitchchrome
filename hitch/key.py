@@ -7,7 +7,7 @@ from hitchrun import DIR
 import dirtemplate
 import hitchpylibrarytoolkit
 from path import Path
-#from engine import Engine
+from versionbullshit import get_versions
 
 PROJECT_NAME = "hitchchrome"
 
@@ -30,9 +30,28 @@ def run():
 def clean():
     """Clean out built chrome"""
     DIR.gen.joinpath("chrome").rmtree(ignore_errors=True)
+    DIR.gen.joinpath("tmp").rmtree(ignore_errors=True)
 
 def deploy(version):
     """
     Deploy to pypi as specified version.
     """
     hitchpylibrarytoolkit.deploy(DIR.project, PROJECT_NAME, version)
+
+
+def checkversioner():
+    """
+    Check version getting works.
+    """
+    import json
+    print(json.dumps(get_versions(), indent=4))
+
+def writeversions():
+    """
+    Get latest linux url.
+    """
+    import json
+    versionsjson = DIR.project.joinpath("hitchchrome", "versions.json")
+    versionsjson.write_text(json.dumps(get_versions(), indent=4))
+    print(versionsjson.text())
+    
