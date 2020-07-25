@@ -20,7 +20,8 @@ but also to prevent this scenario, which has happened to me:
 HitchChrome is part of the [hitchdev framework](http://hitchdev.com).
 
 Please note that this package is intended FOR TESTING ONLY. The
-browser does NOT receive security updates and is potentially unsafe.
+browser does NOT receive security updates and is potentially unsafe
+if used to browse the open web.
 
 ## How?
 
