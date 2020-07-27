@@ -26,7 +26,10 @@ class ChromeBuild(hitchbuild.HitchBuild):
 
     @property
     def chromedriver_bin(self):
-        return Command(self.buildpath / "chromedriver_linux64" / "chromedriver")
+        if self.os_name == "linux":
+            return Command(self.buildpath / "chromedriver_linux64" / "chromedriver")
+        else:
+            return Command(self.buildpath / "chromedriver_mac64" / "chromedriver")
     
     def clean(self):
         self.buildpath.rmtree(ignore_errors=True)
