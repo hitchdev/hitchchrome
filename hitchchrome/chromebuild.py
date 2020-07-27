@@ -53,8 +53,6 @@ class ChromeBuild(hitchbuild.HitchBuild):
             elif self.os_name == "mac":
                 chrome_download_url = download_urls["mac_chrome"]
                 chromedriver_download_url = download_urls["mac_chromedriver"]
-            else:
-                raise Exception("Platform {} not supported :(".format(sys.platform))
             
             # Install chrome
             download_to = self.tmp / "chrome-{}.zip".format(self.version)
