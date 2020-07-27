@@ -19,7 +19,10 @@ class ChromeBuild(hitchbuild.HitchBuild):
     
     @property
     def chrome_bin(self):
-        return Command(self.buildpath / "chrome-linux" / "chrome")
+        if self.os_name == "linux":
+            return Command(self.buildpath / "chrome-linux" / "chrome")
+        else:
+            return Command(self.buildpath / "chrome-mac" / "Chromium.app" / "Contents" / "MacOS" / "Chromium")
 
     @property
     def chromedriver_bin(self):
@@ -27,6 +30,15 @@ class ChromeBuild(hitchbuild.HitchBuild):
     
     def clean(self):
         self.buildpath.rmtree(ignore_errors=True)
+    
+    @property
+    def os_name(self):
+        if sys.platform == "linux2" or sys.platform == "linux":
+            return "linux"
+        elif sys.platform == "darwin":
+            return "mac"
+        else:
+            raise Exception("Platform {} not supported :(".format(sys.platform))
 
     def ensure_built(self):
         if self.incomplete():
@@ -35,14 +47,12 @@ class ChromeBuild(hitchbuild.HitchBuild):
             
             download_urls = json.loads(VERSIONS_PATH.text())[self.version]
             
-            if sys.platform == "linux2" or sys.platform == "linux":
+            if self.os_name == "linux":
                 chrome_download_url = download_urls["linux_chrome"]
                 chromedriver_download_url = download_urls["linux_chromedriver"]
-                os_name = "linux"
-            elif sys.platform == "darwin":
+            elif self.os_name == "darwin":
                 chrome_download_url = download_urls["mac_chrome"]
                 chromedriver_download_url = download_urls["mac_chromedriver"]
-                os_name = "mac"
             else:
                 raise Exception("Platform {} not supported :(".format(sys.platform))
             
@@ -58,14 +68,15 @@ class ChromeBuild(hitchbuild.HitchBuild):
             utils.extract_archive(download_to, self.buildpath)
             download_to.remove()
             
-            chromedriver_bin = Path(self.buildpath / "chromedriver_{}64".format(os_name) / "chromedriver")
-            chromedriver_bin.chmod(
-                chromedriver_bin.stat().st_mode | stat.S_IEXEC
-            )
-            chrome_bin = Path(self.buildpath / "chrome-{}".format(os_name) / "chrome")
-            chrome_bin.chmod(
-                chrome_bin.stat().st_mode | stat.S_IEXEC
-            )
+            if self.os_name == "linux":
+                chromedriver_bin = Path(self.buildpath / "chromedriver_{}64".format(self.os_name) / "chromedriver")
+                chromedriver_bin.chmod(
+                    chromedriver_bin.stat().st_mode | stat.S_IEXEC
+                )
+                chrome_bin = Path(self.buildpath / "chrome-{}".format(self.os_name) / "chrome")
+                chrome_bin.chmod(
+                    chrome_bin.stat().st_mode | stat.S_IEXEC
+                )
             
             self.verify()
             self.refingerprint()
