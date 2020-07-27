@@ -8,12 +8,13 @@ import dirtemplate
 import hitchpylibrarytoolkit
 from path import Path
 from versionbullshit import get_versions
+import json
 
 PROJECT_NAME = "hitchchrome"
 
 @expected(CommandError)
 def run():
-    """Run an end to end test"""
+    """Run example.py with python 3.7.0"""
     python_path = DIR.gen / "venv"
     if not python_path.exists():
         python = hitchpylibrarytoolkit.project_build(
@@ -27,10 +28,19 @@ def run():
     DIR.gen.joinpath("example.py").write_text(DIR.key.joinpath("example.py").text())
     python(DIR.gen.joinpath("example.py")).in_dir(DIR.gen).run()
 
+
+@expected(CommandError)
 def clean():
-    """Clean out built chrome"""
+    """Clean out built chrome and temp directory"""
     DIR.gen.joinpath("chrome").rmtree(ignore_errors=True)
     DIR.gen.joinpath("tmp").rmtree(ignore_errors=True)
+
+
+@expected(CommandError)
+def test():
+    """Clean and run to check the package works in current environment"""
+    clean()
+    run()
 
 def deploy(version):
     """
@@ -43,14 +53,13 @@ def checkversioner():
     """
     Check version getting works.
     """
-    import json
     print(json.dumps(get_versions(), indent=4))
+
 
 def writeversions():
     """
-    Get latest linux url.
+    Write new versions JSON.
     """
-    import json
     versionsjson = DIR.project.joinpath("hitchchrome", "versions.json")
     versionsjson.write_text(json.dumps(get_versions(), indent=4))
     print(versionsjson.text())
