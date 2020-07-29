@@ -2,10 +2,10 @@ import requests
 
 OMAHAPROX = "omahaprox"
 
-def get_for_os(ossmall="linux", oslarge="Linux_x64"):
+def get_for_os(which_version, ossmall, oslarge):
     print(f"Downloading version data for {ossmall}...")
     historyjson = requests.get(f"https://{OMAHAPROX}y.appspot.com/history.json?channel=stable&os={ossmall}").json()
-    version = historyjson[0]['version']
+    version = historyjson[which_version]['version']
     major_version = version.split(".")[0]
     
     existed_positions = requests.get((
@@ -14,7 +14,7 @@ def get_for_os(ossmall="linux", oslarge="Linux_x64"):
     )).json()
     
     base_position = requests.get(
-        "https://omahaproxy.appspot.com/deps.json?version={}".format(version)
+        "https://{}y.appspot.com/deps.json?version={}".format(OMAHAPROX, version)
     ).json()['chromium_base_position']                                       
 
     download_urls_available = requests.get((
@@ -47,8 +47,8 @@ def get_for_os(ossmall="linux", oslarge="Linux_x64"):
 
 def get_versions():
     print("Downloading version data...")
-    version, chrome_url, driver_url = get_for_os()
-    version, mac_chrome_url, mac_driver_url = get_for_os("mac", "Mac")
+    version, chrome_url, driver_url = get_for_os(0, "linux", "Linux_x64")
+    version, mac_chrome_url, mac_driver_url = get_for_os(0, "mac", "Mac")
 
     return {
         version : {
