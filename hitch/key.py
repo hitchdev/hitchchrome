@@ -21,6 +21,9 @@ def run(name=""):
             print(example.basename().replace(".py", ""))
         return
 
+    if DIR.gen.joinpath("screenshot.png").exists():
+        DIR.gen.joinpath("screenshot.png").remove()
+
     python_path = DIR.gen / "venv"
     if not python_path.exists():
         python = hitchpylibrarytoolkit.project_build(
@@ -32,6 +35,7 @@ def run(name=""):
         python = Path(python_path) / "bin" / "python"
     assert Path(python).exists()
     python(DIR.key.joinpath("examples", "{}.py".format(name))).in_dir(DIR.gen).run()
+    assert DIR.gen.joinpath("screenshot.png").exists(), "screenshot should have been created"
 
 
 @expected(CommandError)

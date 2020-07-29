@@ -12,7 +12,12 @@ driver = chrome_build.webdriver(
         "--no-sandbox",
     ],
 )
+
+from selenium.webdriver.common.keys import Keys
 driver.get("http://www.google.com")
+driver.find_element_by_name("q").send_keys("ponies")
+driver.find_element_by_name("q").send_keys(Keys.ENTER)
+driver.save_screenshot("screenshot.png")
 driver.quit()
 
 print("Chrome arguments ran")
