@@ -50,6 +50,20 @@ driver.get("http://www.google.com")
 driver.quit()
 ```
 
+You can also add chrome options arguments like so:
+
+```python
+driver = chrome_build.webdriver(
+    headless=True,
+    arguments=[
+        "--window-size=1024,768",
+        "--disable-dev-shm-usage",
+        "--no-sandbox",
+    ]
+)
+```
+
+
 ## Package Status
 
 * Alpha state. No rigorous regression testing applied yet.

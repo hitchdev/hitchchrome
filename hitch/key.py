@@ -13,8 +13,14 @@ import json
 PROJECT_NAME = "hitchchrome"
 
 @expected(CommandError)
-def run():
+def run(name=""):
     """Run example.py with python 3.7.0"""
+    examples = DIR.key / "examples"
+    if name == "":
+        for example in examples.listdir():
+            print(example.basename().replace(".py", ""))
+        return
+
     python_path = DIR.gen / "venv"
     if not python_path.exists():
         python = hitchpylibrarytoolkit.project_build(
@@ -25,8 +31,7 @@ def run():
     else:
         python = Path(python_path) / "bin" / "python"
     assert Path(python).exists()
-    DIR.gen.joinpath("example.py").write_text(DIR.key.joinpath("example.py").text())
-    python(DIR.gen.joinpath("example.py")).in_dir(DIR.gen).run()
+    python(DIR.key.joinpath("examples", "{}.py".format(name))).in_dir(DIR.gen).run()
 
 
 @expected(CommandError)
@@ -37,10 +42,10 @@ def clean():
 
 
 @expected(CommandError)
-def test():
+def test(name):
     """Clean and run to check the package works in current environment"""
     clean()
-    run()
+    run(name)
 
 def deploy(version):
     """

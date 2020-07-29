@@ -11,7 +11,9 @@ import sys
 VERSIONS_PATH = Path(__file__).dirname().abspath() / "versions.json"
 
 class ChromeBuild(hitchbuild.HitchBuild):
-    def __init__(self, path, version):
+    def __init__(self, path, version=None):
+        if version is None:
+            version = "84"
         assert version == "84"
         self.buildpath = Path(path).abspath()
         self.fingerprint_path = self.buildpath / "fingerprint.txt"
@@ -85,13 +87,15 @@ class ChromeBuild(hitchbuild.HitchBuild):
         assert self.version in self.chrome_bin("--version").output()
         assert self.version in self.chromedriver_bin("--version").output()
     
-    def webdriver(self, headless=False, nosandbox=False):
+    def webdriver(self, headless=False, arguments=None):
         options = Options()
         options.binary_location = str(self.chrome_bin)
         options.headless = headless
 
-        if nosandbox:
-            options.add_argument("--no-sandbox")
+        if arguments is not None:
+            assert isinstance(arguments, list), 'arguments must be a list - e.g. ["--nosandbox"]'
+            for argument in arguments:
+                options.add_argument(argument)
 
         return webdriver.Chrome(
             options=options,
