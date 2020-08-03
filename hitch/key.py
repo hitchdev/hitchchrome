@@ -54,6 +54,13 @@ def run(name=""):
 def bdd(*keywords):
     """Run single story."""
     toolkit.bdd(Engine(build), keywords)
+    
+
+@expected(HitchStoryException)
+def regression():
+    """Run all stories."""
+    clean()
+    toolkit.regression(Engine(build))
 
 
 @expected(CommandError)
