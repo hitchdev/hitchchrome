@@ -8,9 +8,21 @@ import dirtemplate
 import hitchpylibrarytoolkit
 from path import Path
 from versionbullshit import get_versions
+from engine import Engine
 import json
 
 PROJECT_NAME = "hitchchrome"
+
+toolkit = hitchpylibrarytoolkit.ProjectToolkit(
+    "hitchchrome",
+    DIR,
+)
+
+build = hitchpylibrarytoolkit.PyLibraryBuild(
+    "hitchchrome",
+    DIR,
+)
+
 
 @expected(CommandError)
 def run(name=""):
@@ -36,6 +48,12 @@ def run(name=""):
     assert Path(python).exists()
     python(DIR.key.joinpath("examples", "{}.py".format(name))).in_dir(DIR.gen).run()
     assert DIR.gen.joinpath("screenshot.png").exists(), "screenshot should have been created"
+
+
+@expected(HitchStoryException)
+def bdd(*keywords):
+    """Run single story."""
+    toolkit.bdd(Engine(build), keywords)
 
 
 @expected(CommandError)
