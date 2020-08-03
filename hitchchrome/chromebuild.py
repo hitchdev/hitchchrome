@@ -62,9 +62,15 @@ class ChromeBuild(hitchbuild.HitchBuild):
             # Install chrome
             download_to = self.tmp / "chrome-{}.zip".format(self.version)
             utils.download_file(download_to, chrome_download_url)
-            utils.extract_archive(download_to, self.buildpath)
+
+            if self.os_name == "mac":
+                # patool has a bug on mac that breaks chromium
+                Command("unzip", download_to).in_dir(self.buildpath).run()
+            else:
+                utils.extract_archive(download_to, self.buildpath)
+
             download_to.remove()
-                                      
+
             # Install chromedriver
             download_to = self.tmp / "chromedriver-{}.zip".format(self.version)
             utils.download_file(download_to, chromedriver_download_url)
