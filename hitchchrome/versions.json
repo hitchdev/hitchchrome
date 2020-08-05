@@ -1,8 +1,26 @@
 {
     "84": {
-        "linux_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F768968%2Fchrome-linux.zip?generation=1589492137977189&alt=media",
-        "linux_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F768968%2Fchromedriver_linux64.zip?generation=1589492142972831&alt=media",
+        "linux_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F768959%2Fchrome-linux.zip?generation=1589490727542041&alt=media",
+        "linux_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F768959%2Fchromedriver_linux64.zip?generation=1589490732430663&alt=media",
         "mac_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F768968%2Fchrome-mac.zip?generation=1589493463554900&alt=media",
         "mac_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F768968%2Fchromedriver_mac64.zip?generation=1589493478846440&alt=media"
+    },
+    "83": {
+        "linux_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F756066%2Fchrome-linux.zip?generation=1585871012733067&alt=media",
+        "linux_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F756066%2Fchromedriver_linux64.zip?generation=1585871017688644&alt=media",
+        "mac_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F756071%2Fchrome-mac.zip?generation=1585873850150779&alt=media",
+        "mac_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F756071%2Fchromedriver_mac64.zip?generation=1585873861428718&alt=media"
+    },
+    "81": {
+        "linux_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F737173%2Fchrome-linux.zip?generation=1580437726966456&alt=media",
+        "linux_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F737173%2Fchromedriver_linux64.zip?generation=1580437732168472&alt=media",
+        "mac_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F737173%2Fchrome-mac.zip?generation=1580439603041229&alt=media",
+        "mac_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F737173%2Fchromedriver_mac64.zip?generation=1580439616001974&alt=media"
+    },
+    "80": {
+        "linux_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F722276%2Fchrome-linux.zip?generation=1575588380806233&alt=media",
+        "linux_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F722276%2Fchromedriver_linux64.zip?generation=1575588386931675&alt=media",
+        "mac_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F722274%2Fchrome-mac.zip?generation=1575589468690598&alt=media",
+        "mac_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F722274%2Fchromedriver_mac64.zip?generation=1575589478893903&alt=media"
     }
 }
