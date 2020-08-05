@@ -16,9 +16,21 @@ class HitchChromeBuildException(Exception):
 
 class ChromeBuild(hitchbuild.HitchBuild):
     def __init__(self, path, version=None, only_driver=False):
+        self._download_urls = json.loads(VERSIONS_PATH.text())
+        self._versions_available = list(self._download_urls.keys())
+
         if version is None:
-            version = "84"
-        assert version == "84"
+            version = self._versions_available[0]
+
+        if version not in self._versions_available:
+            raise HitchChromeBuildException((
+                "Chrome version {} not available in this package, "
+                "available versions are {}".format(
+                    version,
+                    ", ".join(self._versions_available),
+                )
+            ))
+
         self.buildpath = Path(path).abspath()
         self.version = version
         self._install_chrome = self.variable("install_chrome", not only_driver)
@@ -74,7 +86,7 @@ class ChromeBuild(hitchbuild.HitchBuild):
                 self.buildpath.rmtree()
             self.buildpath.mkdir()
             
-            download_urls = json.loads(VERSIONS_PATH.text())[self.version]
+            download_urls = self._download_urls[self.version]
             
             if self.os_name == "linux":
                 chrome_download_url = download_urls["linux_chrome"]
