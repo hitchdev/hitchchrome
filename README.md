@@ -66,8 +66,7 @@ driver = chrome_build.webdriver(
 
 ## Package Status
 
-* Alpha state. No rigorous regression testing applied yet.
-* Currently only works with Chromium stable version 84. Should work with multiple stable versions.
+* Works with chrome versions 80 - 84.
 
 ## Why not X?
 
