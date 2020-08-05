@@ -1,0 +1,2 @@
+class HitchChromeException(Exception):
+    pass

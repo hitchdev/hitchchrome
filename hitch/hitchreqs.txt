@@ -9,7 +9,7 @@ cffi==1.14.1              # via cryptography
 chardet==3.0.4            # via requests
 click==7.1.2              # via black, hitchrun, pip-tools
 colorama==0.4.3           # via hitchrun, hitchstory, prettystack, twine
-commandlib==0.3.5         # via hitchbuildpy, hitchrun, icommandlib
+commandlib==0.3.5         # via hitchbuildpy, hitchchrome, hitchrun, icommandlib
 cryptography==3.0         # via secretstorage
 decorator==4.4.2          # via ipython, traitlets
 dirtemplate==0.4.0        # via hitchpylibrarytoolkit
@@ -17,8 +17,9 @@ docutils==0.16            # via readme-renderer
 flake8==3.8.3             # via hitchpylibrarytoolkit
 gitdb==4.0.5              # via gitpython
 gitpython==3.1.7          # via hitchpylibrarytoolkit
-hitchbuild==0.6.1         # via dirtemplate, hitchbuildpy
+hitchbuild==0.6.1         # via dirtemplate, hitchbuildpy, hitchchrome
 hitchbuildpy==0.5.4       # via hitchpylibrarytoolkit
+hitchchrome==0.3.4        # via -r hitchreqs.in
 hitchpylibrarytoolkit==0.3.6  # via -r hitchreqs.in
 hitchrun==0.3.4           # via -r hitchreqs.in, hitchpylibrarytoolkit
 hitchrunpy==0.10.0        # via hitchpylibrarytoolkit
@@ -36,10 +37,11 @@ markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8
 packaging==20.4           # via bleach
 parso==0.7.1              # via jedi
-path.py==12.5.0           # via hitchbuild, hitchrun, hitchrunpy, hitchstory, pathquery, prettystack
+path.py==12.5.0           # via hitchbuild, hitchchrome, hitchrun, hitchrunpy, hitchstory, pathquery, prettystack
 path==15.0.0              # via path.py
 pathquery==0.3.0          # via dirtemplate, hitchbuild, hitchbuildpy, hitchstory
 pathspec==0.8.0           # via black
+patool==1.12              # via hitchchrome
 peewee==3.13.3            # via hitchbuild
 pexpect==4.8.0            # via ipython
 pickleshare==0.7.5        # via ipython
@@ -67,6 +69,7 @@ rfc3986==1.4.0            # via twine
 ruamel.yaml.clib==0.2.0   # via ruamel.yaml
 ruamel.yaml==0.16.10      # via strictyaml
 secretstorage==3.1.2      # via keyring
+selenium==3.141.0         # via hitchchrome
 six==1.15.0               # via bleach, cryptography, packaging, pip-tools, python-dateutil, readme-renderer, traitlets
 smmap==3.0.4              # via gitdb
 strictyaml==1.0.6         # via dirtemplate, hitchstory
@@ -77,7 +80,7 @@ tqdm==4.48.2              # via twine
 traitlets==4.3.3          # via ipython
 twine==3.2.0              # via hitchpylibrarytoolkit
 typed-ast==1.4.1          # via black
-urllib3==1.25.10          # via requests
+urllib3==1.25.10          # via requests, selenium
 uvloop==0.14.0            # via icommandlib
 wcwidth==0.2.5            # via prompt-toolkit, pyte
 webencodings==0.5.1       # via bleach
