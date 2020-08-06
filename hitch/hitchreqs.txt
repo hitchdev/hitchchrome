@@ -20,7 +20,7 @@ gitpython==3.1.7          # via hitchpylibrarytoolkit
 hitchbuild==0.6.1         # via dirtemplate, hitchbuildpy, hitchchrome
 hitchbuildpy==0.5.4       # via hitchpylibrarytoolkit
 hitchchrome==0.3.4        # via -r hitchreqs.in
-hitchpylibrarytoolkit==0.3.6  # via -r hitchreqs.in
+hitchpylibrarytoolkit==0.3.8  # via -r hitchreqs.in
 hitchrun==0.3.4           # via -r hitchreqs.in, hitchpylibrarytoolkit
 hitchrunpy==0.10.0        # via hitchpylibrarytoolkit
 hitchstory==0.12.1        # via hitchpylibrarytoolkit

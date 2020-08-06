@@ -16,7 +16,11 @@ Only chromedriver:
             driver.save_screenshot(screenshot_filename)
             driver.quit()
         
-        chrome_build = ChromeBuild("../../chrome", version="84", only_driver=True)
+        chrome_build = ChromeBuild(
+            "../../chrome",
+            version=getenv("EXTERNAL_VERSION", "84"),
+            only_driver=True
+        )
 
   steps:
   - run: |
