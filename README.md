@@ -63,6 +63,13 @@ driver = chrome_build.webdriver(
 )
 ```
 
+Or, you can grab the binary locations for use elsewhere:
+
+```python
+print(chrome_build.chrome_bin)
+print(chrome_build.chromedriver_bin)
+```
+
 
 ## Package Status
 
