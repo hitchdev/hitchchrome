@@ -13,13 +13,13 @@ class Engine(hitchpylibrarytoolkit.Engine):
     )
         
     def set_up(self):
-        super().set_up()
-        self._chrome = hitchchrome.ChromeBuild(
-            self._build._paths.gen / "devchrome"
-        )
-        self._chrome.ensure_built()
-        if "EXTERNAL_CHROME" not in os.environ:
-            os.environ["EXTERNAL_CHROME"] = str(self._chrome.chrome_bin)
+        self._build.ensure_built()
+
+        for filename, contents in self.given.get('files', {}).items():
+            filepath = self._build.working.parent.joinpath(filename)
+            if not filepath.dirname().exists():
+                filepath.dirname().makedirs()
+            filepath.write_text(contents)
 
     def screenshot_exists(self, filename):
         assert self._build.working.joinpath(filename).exists()
