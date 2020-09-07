@@ -1,4 +1,10 @@
 {
+    "85": {
+        "linux_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F782790%2Fchrome-linux.zip?generation=1593134686327030&alt=media",
+        "linux_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F782790%2Fchromedriver_linux64.zip?generation=1593134691922615&alt=media",
+        "mac_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F782782%2Fchrome-mac.zip?generation=1593135780819728&alt=media",
+        "mac_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2F782782%2Fchromedriver_mac64.zip?generation=1593135795047727&alt=media"
+    },
     "84": {
         "linux_chrome": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F768959%2Fchrome-linux.zip?generation=1589490727542041&alt=media",
         "linux_chromedriver": "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F768959%2Fchromedriver_linux64.zip?generation=1589490732430663&alt=media",
